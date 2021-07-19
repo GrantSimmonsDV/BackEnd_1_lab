@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body class="container">
+    <h1>Dogs</h1>
+    <ul id="dogs" class=""></ul>
+
+    <button id="button">GET Dogs List</button>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById("button").onclick = function () {
+            axios
+                .get("http://localhost:4050/dogs")
+                .then(function (response) {
+                    const data = response.data;
+                    document.getElementById("dogs").innerHTML = data
+                        .map(function (dogs) {
+                            return '<li class="row">' + dogs;
+                        })
+                        .join("");
+                })
+                .catch(function (err) {
+                    document.getElementById("dogs").innerHTML =
+                        '<li class="text-danger">' + err.message + "</li>";
+                });
+        };
+    </script>
+    <script src="index2.js"></script>
+</body>
+
+</html>
